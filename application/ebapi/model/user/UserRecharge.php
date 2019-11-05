@@ -72,11 +72,11 @@ class UserRecharge extends ModelBasic
         $user = User::getUserInfo($uid);
         self::beginTrans();
         try{
-            if($price > $user['brokerage_price']) return self::setErrorInfo('转入金额不能大于当前佣金！');
+//            if($price > $user['brokerage_price']) return self::setErrorInfo('转入金额不能大于当前佣金！');
             $res1 = User::bcInc($uid,'now_money',$price,'uid'); //增余额
-            $res3 = User::bcDec($uid,'brokerage_price',$price,'uid');//减佣金
+//            $res3 = User::bcDec($uid,'brokerage_price',$price,'uid');//减佣金
             $res2 = UserBill::expend('用户佣金转入余额',$uid,'now_money','recharge',$price,0,$user['now_money'],'成功转入余额'.floatval($price).'元');
-            $res = $res2 && $res1 && $res3;
+            $res = $res2 && $res1;
             self::checkTrans($res);
             return $res;
         }catch (\Exception $e){

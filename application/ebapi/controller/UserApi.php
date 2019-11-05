@@ -28,6 +28,7 @@ use service\JsonService;
 use app\core\util\SystemConfigService;
 use service\UploadService;
 use service\UtilService;
+use think\Db;
 use think\Request;
 use think\Cache;
 

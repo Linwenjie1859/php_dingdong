@@ -193,10 +193,14 @@ class AuthApi extends AuthController
         if (!$key) return JsonService::fail('参数错误!');
         if (StoreOrder::be(['order_id|unique' => $key, 'uid' => $this->userInfo['uid'], 'is_del' => 0]))
             return JsonService::status('extend_order', '订单已生成', ['orderId' => $key, 'key' => $key]);
-        list($addressId, $couponId, $payType, $useIntegral, $mark, $combinationId, $pinkId, $seckill_id, $formId, $bargainId) = UtilService::postMore([
-            'addressId', 'couponId', 'payType', 'useIntegral', 'mark', ['combinationId', 0], ['pinkId', 0], ['seckill_id', 0], ['formId', ''], ['bargainId', '']
+        list($addressId, $couponId, $payType, $useIntegral, $mark, $combinationId, $pinkId, $seckill_id, $formId, $bargainId,$price) = UtilService::postMore([
+            'addressId', 'couponId', 'payType', 'useIntegral', 'mark', ['combinationId', 0], ['pinkId', 0], ['seckill_id', 0], ['formId', ''], ['bargainId', ''],['price',0]
         ], Request::instance(), true);
-      
+        $res = User::bcDec($this->userInfo['uid'],'now_money',$price,'uid');//减用户余额
+        if($res!=1)  return JsonService::fail('您的余额不足请尽快充值。');
+        if($price<=0)return JsonService::fail('订单异常,请刷新页面');
+
+
         $payType = $payType ? strtolower($payType) : 'weixinapp';
    
         if ($bargainId) StoreBargainUser::setBargainUserStatus($bargainId, $this->userInfo['uid']); //修改砍价状态
@@ -253,10 +257,13 @@ class AuthApi extends AuthController
                     RoutineFormId::SetFormId($formId, $this->uid);
                     //                RoutineTemplate::sendOrderSuccess($formId,$orderId);//发送模板消息
                     return JsonService::status('success', '订单创建成功', $info);
+                    break;
                 case 'weixinapp':
-                    RoutineFormId::SetFormId($formId, $this->uid);
-                    //                RoutineTemplate::sendOrderSuccess($formId,$orderId);//发送模板消息
-                    return JsonService::status('weixin_app', '订单创建成功', $info);
+                    if($res==1)  {
+                        RoutineFormId::SetFormId($formId, $this->uid);
+                        return JsonService::status('weixin_app', '订单创建成功', $info);
+                    }
+                    break;
                 case 'alipayapp':
                     RoutineFormId::SetFormId($formId, $this->uid);
                     //                RoutineTemplate::sendOrderSuccess($formId,$orderId);//发送模板消息
