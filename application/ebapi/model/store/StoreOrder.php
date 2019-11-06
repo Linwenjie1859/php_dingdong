@@ -820,7 +820,7 @@ class StoreOrder extends ModelBasic
 
     public static function getUserOrderList($uid,$status = '',$page = 0,$limit = 8)
     {
-        $list = self::statusByWhere($status,$uid)->where('is_del',0)->where('uid',$uid)
+        $list = self::statusByWhere($status,$uid)->where('uid',$uid)
             ->field('add_time,seckill_id,bargain_id,combination_id,id,order_id,pay_price,total_num,total_price,pay_postage,total_postage,paid,status,refund_status,pay_type,coupon_price,deduction_price,pink_id,delivery_type,is_del')
             ->order('add_time DESC')->page((int)$page,(int)$limit)->select()->toArray();
         foreach ($list as $k=>$order){
@@ -843,7 +843,7 @@ class StoreOrder extends ModelBasic
 
     public static function searchUserOrder($uid,$order_id)
     {
-        $order = self::where('uid',$uid)->where('order_id',$order_id)->where('is_del',0)->field('seckill_id,bargain_id,combination_id,id,order_id,pay_price,total_num,total_price,pay_postage,total_postage,paid,status,refund_status,pay_type,coupon_price,deduction_price,delivery_type')
+        $order = self::where('uid',$uid)->where('order_id',$order_id)->field('*')
             ->order('add_time DESC')->find();
         if(!$order)
             return false;

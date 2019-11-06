@@ -215,7 +215,7 @@ class Login extends Controller
         if(md5($userInfo['pwd']) != $user['pwd']){
             return JsonService::fail('密码错误！');
         }
-
+        $userInfo['nickname'] = $user['nickname'];
         $userInfo['uid'] = $user['uid'];
         $userInfo['token'] = TokenService::getToken($user['uid'],$userInfo['phone']);
         if($userInfo['token']===false) return JsonService::fail('获取用户访问token失败!');
