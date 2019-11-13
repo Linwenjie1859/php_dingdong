@@ -43,6 +43,8 @@ class PublicApi extends AuthController
             'clear_cache',
             'get_logo_url',
             'get_my_naviga',
+            'upload',
+            'upload_base64'
         ];
     }
 
@@ -212,8 +214,9 @@ class PublicApi extends AuthController
      * @param string $filename
      * @return \think\response\Json
      */
-    public function upload($dir='')
+    public function upload()
     {
+        $dir='';
         $data = UtilService::postMore([
             ['filename',''],
         ],$this->request);
@@ -228,7 +231,18 @@ class PublicApi extends AuthController
         Cache::set('start_uploads_'.$this->uid,$start_uploads,86400);
         return $this->successful('图片上传成功!', ['name' => $res['name'], 'url' => UploadService::pathToUrl($res['dir'])]);
     }
-
+    public function upload_base64()
+    {
+        $dir='';
+        $data = UtilService::postMore([
+            ['filename',''],
+        ],$this->request);
+        $tmp=base64_decode(substr($data['filename'],23));
+        $tmpStr = 'BOOKSTORN'.time().rand(100,9999);
+        $url=UPLOAD_PATH.DS.'store/comment'.DS.$tmpStr.".jpg";
+        file_put_contents(ROOT_PATH.$url,$tmp);
+        return $this->successful('图片上传成功!', [ 'url' =>$url]);
+    }
     /**
      * 获取退款理由
      */

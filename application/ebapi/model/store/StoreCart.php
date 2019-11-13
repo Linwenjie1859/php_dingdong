@@ -21,7 +21,7 @@ class StoreCart extends ModelBasic
         return time();
     }
 
-    public static function setCart($uid,$product_id,$cart_num = 1,$product_attr_unique = '',$type='product',$is_new = 0,$combination_id=0,$seckill_id = 0,$bargain_id = 0)
+    public static function setCart($uid,$product_id,$cart_num = 1,$product_attr_unique = '',$type='product',$is_new = 0,$combination_id=0,$seckill_id = 0,$bargain_id = 0,$immediately=true)
     {
         if($cart_num < 1) $cart_num = 1;
         if($seckill_id){
@@ -71,7 +71,11 @@ class StoreCart extends ModelBasic
         }
         $where = ['type'=>$type,'uid'=>$uid,'product_id'=>$product_id,'product_attr_unique'=>$product_attr_unique,'is_new'=>$is_new,'is_pay'=>0,'is_del'=>0,'combination_id'=>$combination_id];
         if($cart = self::where($where)->find()){
-            $cart->cart_num = $cart_num;
+            if($immediately){
+                $cart->cart_num = $cart->cart_num + $cart_num;
+            }else{
+                $cart->cart_num = $cart_num;
+            }
             $cart->add_time = time();
             $cart->save();
             return $cart;

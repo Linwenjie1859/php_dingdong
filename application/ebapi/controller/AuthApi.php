@@ -16,6 +16,7 @@ use app\ebapi\model\user\User;
 use app\ebapi\model\store\StorePink;
 use app\ebapi\model\store\StoreBargainUser;
 use app\ebapi\model\store\StoreBargainUserHelp;
+use think\Db;
 
 /**
  * 小程序 购物车,新增订单等 api接口
@@ -143,7 +144,7 @@ class AuthApi extends AuthController
     {
         if (!$productId || !is_numeric($productId)) return JsonService::fail('参数错误');
         if ($bargainId && StoreBargainUserHelp::getSurplusPrice($bargainId, $this->userInfo['uid'])) return JsonService::fail('请先砍价');
-        $res = StoreCart::setCart($this->userInfo['uid'], $productId, $cartNum, $uniqueId, 'product', $is_new, $combinationId, $secKillId, $bargainId);
+        $res = StoreCart::setCart($this->userInfo['uid'], $productId, $cartNum, $uniqueId, 'product', 1, $combinationId, $secKillId, $bargainId,false);
         if (!$res) return JsonService::fail(StoreCart::getErrorInfo());
         else  return JsonService::successful('ok', ['cartId' => $res->id]);
     }
