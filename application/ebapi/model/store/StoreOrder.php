@@ -245,7 +245,7 @@ class StoreOrder extends ModelBasic
             'pay_price'=>$payPrice,
             'pay_postage'=>$payPostage,
             'deduction_price'=>$deductionPrice,
-            'paid'=>0,
+            'paid'=>1,
             'pay_type'=>$payType,
             'use_integral'=>$usedIntegral,
             'gain_integral'=>$gainIntegral,
