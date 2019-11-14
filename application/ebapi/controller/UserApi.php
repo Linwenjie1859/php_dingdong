@@ -28,7 +28,6 @@ use service\JsonService;
 use app\core\util\SystemConfigService;
 use service\UploadService;
 use service\UtilService;
-use think\Db;
 use think\Request;
 use think\Cache;
 
@@ -292,8 +291,8 @@ class UserApi extends AuthController
     public function user_wechat_recharge($price = 0,$type = 0)
     {
         if(!$price || $price <=0) return JsonService::fail('参数错误');
-        $storeMinRecharge = SystemConfigService::get('store_user_min_recharge');
-        if($price < $storeMinRecharge) return JsonService::fail('充值金额不能低于'.$storeMinRecharge);
+        // $storeMinRecharge = SystemConfigService::get('store_user_min_recharge');
+        // if($price < $storeMinRecharge) return JsonService::fail('充值金额不能低于'.$storeMinRecharge);
         switch ((int)$type){
             case 0:
                 $rechargeOrder = UserRecharge::addRecharge($this->userInfo['uid'],$price,'routine');

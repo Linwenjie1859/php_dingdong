@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,7 +148,11 @@
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe_crmeb_main" width="100%" height="100%" src="{:Url('Index/main')}" frameborder="0" data-id="{:Url('Index/main')}" seamless></iframe>
         </div>
-       
+        <!--底部版权-->
+        <div class="footer"  @touchmove.prevent>
+            <div class="pull-right">© 2014-2018 <a href="http://www.crmeb.com/" target="_blank">CRMEB</a>
+            </div>
+        </div>
     </div>
     <!--右侧部分结束-->
     <!--右侧边栏开始-->
@@ -262,6 +264,7 @@
             </div>
         </div>
     </div>
+
     <!--右侧边栏结束-->
 </div>
 <!--vue调用不能删除-->
@@ -279,6 +282,5 @@
     window.newOrderAudioLink='{$new_order_audio_link}';
 </script>
 <script src="{__ADMIN_PATH}js/index.js"></script>
-
 </body>
 </html>

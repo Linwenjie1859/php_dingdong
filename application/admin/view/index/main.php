@@ -1,7 +1,6 @@
 {extend name="public/container"}
 {block name="head_top"}
 <!-- 全局js -->
-
 <script src="{__PLUG_PATH}echarts/echarts.common.min.js"></script>
 <script src="{__PLUG_PATH}echarts/theme/macarons.js"></script>
 <script src="{__PLUG_PATH}echarts/theme/westeros.js"></script>

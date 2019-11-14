@@ -19,7 +19,5 @@ return [
         // 是否自动开启 SESSION
         'auto_start'     => true,
     ],
-    'empty_controller' =>'Index',
-    'Config_name' => 'Linwen jie',
-
+    'empty_controller' =>'Index'
 ];

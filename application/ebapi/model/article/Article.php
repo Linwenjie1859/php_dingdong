@@ -77,8 +77,6 @@ class Article extends ModelBasic
      * @return mixed
      */
     public static function getArticleListBanner($field = 'id,title,image_input,visit,add_time,synopsis,url'){
-        //两种写法不同，但是实现的功能相同_Handsome
-        // $model=self::field($field)->where('status', 1)->where('hide', 0)->where('is_banner', 1)->order('sort DESC,add_time DESC');
         $model = new self();
         $model = $model->field($field);
         $model = $model->where('status', 1);

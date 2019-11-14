@@ -9,6 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+
 return [
     'session'                => [
         // SESSION 前缀
@@ -22,10 +23,10 @@ return [
     // 应用Trace
     'app_trace'              => false,
 
-    // 'exception_handle' => app\admin\controller\AdminException::class,
+    'exception_handle' => app\admin\controller\AdminException::class,
     'empty_controller' =>'Index',
     // 视图输出字符串内容替换
-    'view_replace_str'       => [ 
+    'view_replace_str'       => [
         '{__PUBLIC_PATH}' =>  PUBILC_PATH,                 //public 目录
         '{__STATIC_PATH}' =>  PUBILC_PATH.'static/',       //全局静态目录
         '{__PLUG_PATH}'   =>  PUBILC_PATH.'static/plug/',  //全局静态插件

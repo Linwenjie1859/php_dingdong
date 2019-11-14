@@ -102,14 +102,6 @@ class StoreApi extends AuthController
         return JsonService::successful($dataCate);
     }
     /**
-     * 获取一级和二级分类
-     * @return \think\response\Json
-     */
-    public function get_product_category()
-    {
-        return JsonService::successful(StoreCategory::getProductCategory());
-    }
-    /**
      * 分类页面产品
      * @param string $keyword
      * @param int $cId
@@ -133,7 +125,6 @@ class StoreApi extends AuthController
             ['page',0],
             ['limit',0]
         ],$this->request);
-        // return JsonService::successful($data);
         return JsonService::successful(StoreProduct::getProductList($data,$this->uid));
     }
 
@@ -147,9 +138,7 @@ class StoreApi extends AuthController
         $storeInfo['description'] = preg_replace_callback('#<img.*?src="([^"]*)"[^>]*>#i',function ($imagsSrc){
             return isset($imagsSrc[1]) && isset($imagsSrc[0]) ? str_replace($imagsSrc[1],str_replace('\\','/',$imagsSrc[1]),$imagsSrc[0]): '';
         },$storeInfo['description']);
-
         $storeInfo['userCollect'] = StoreProductRelation::isProductRelation($id,$this->userInfo['uid'],'collect');
-
         list($productAttr,$productValue) = StoreProductAttr::getProductAttrDetail($id);
         setView($this->userInfo['uid'],$id,$storeInfo['cate_id'],'viwe');
         $data['storeInfo'] = StoreProduct::setLevelPrice($storeInfo,$this->uid,true);
@@ -290,7 +279,14 @@ class StoreApi extends AuthController
         return JsonService::successful($cartInfo);
     }
 
-
+    /**
+     * 获取一级和二级分类
+     * @return \think\response\Json
+     */
+    public function get_product_category()
+    {
+        return JsonService::successful(StoreCategory::getProductCategory());
+    }
 
     /**
      * 获取产品评论
@@ -328,6 +324,7 @@ class StoreApi extends AuthController
         if(!$productId || !is_numeric($productId)) return JsonService::fail('参数错误!');
         list($productAttr,$productValue) = StoreProductAttr::getProductAttrDetail($productId);
         return JsonService::successful(compact('productAttr','productValue'));
+
     }
 
     /*

@@ -109,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="layui-col-sm12">
+        <div class="layui-col-sm12">
             <div class="layui-card">
                 <div class="layui-card-header">图表展示:</div>
                 <div class="layui-card-body layui-row">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="layui-col-sm12">
             <div class="layui-card">
                 <div class="layui-card-header">交易类型:</div>

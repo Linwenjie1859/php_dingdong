@@ -60,7 +60,7 @@ class CouponsApi extends AuthController
 
 
     /**
-     * 领取优惠券 一部分信息
+     * 领取优惠券
      * @param string $couponId
      * @return \think\response\Json
      */
@@ -75,7 +75,7 @@ class CouponsApi extends AuthController
     }
 
     /**
-     * 用户 获取一条优惠券
+     * 获取一条优惠券
      * @param int $couponId
      * @return \think\response\Json
      */
@@ -93,6 +93,4 @@ class CouponsApi extends AuthController
     {
         return JsonService::successful(StoreCouponIssue::getIssueCouponList($this->uid,$limit,$page));
     }
-
-
 }

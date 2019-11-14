@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-sm12">
+        <!-- <div class="layui-col-sm12">
             <div class="layui-card">
                 <div class="layui-card-header">图表展示:</div>
                 <div class="layui-card-body layui-row">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="layui-col-sm6">
             <div class="layui-card">
                 <div class="layui-card-header">销量排行　<span class="layui-badge layui-bg-orange">TOP10</span></div>
@@ -374,7 +374,7 @@
                 }
             },
             mounted:function () {
-                this.setChart(this.$refs.echarts_list,'list');
+                // this.setChart(this.$refs.echarts_list,'list');
                 this.info();
                 this.getSalesList();
                 this.getProfityList();

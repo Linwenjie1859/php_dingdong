@@ -1,4 +1,3 @@
-
 {extend name="public/container"}
 {block name="content"}
 <div class="layui-fluid" style="background: #fff;margin-top: -10px;">

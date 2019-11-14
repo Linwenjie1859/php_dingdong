@@ -51,11 +51,8 @@ class ArticleApi extends Basic
      * @return json
      */
     public function get_article_banner()
-    {   
-        // $Artic=new ArticleModel();
-        // return $this->successful( $Artic->field("id,title,image_input,visit,from_unixtime(add_time,'%Y-%m-%d %H:%i') as add_time,synopsis,url")->where('status', 1)->where('hide', 0)->where('is_banner', 1)->order('sort DESC,add_time DESC')->select());
-        $result=ArticleModel::getArticleListBanner("id,title,image_input,visit,from_unixtime(add_time,'%Y-%m-%d %H:%i:%s') as add_time,synopsis,url");
-        return $this->successful($result);
+    {
+        return $this->successful(ArticleModel::getArticleListBanner("id,title,image_input,visit,from_unixtime(add_time,'%Y-%m-%d %H:%i') as add_time,synopsis,url"));
     }
 
     /**

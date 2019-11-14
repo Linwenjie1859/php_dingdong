@@ -67,7 +67,7 @@ class Index extends AuthController
             'storePink'=>$storePink,
         ]);
         return $this->fetch();
-    }   
+    }
 
     public function about()
     {

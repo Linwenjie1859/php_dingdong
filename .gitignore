@@ -1,15 +1,12 @@
 # Windows thumbnail cache files
+/.idea
+/runtime
+/public/uploads
+/application/database.php
+# Windows thumbnail cache files
 /thinkphp/
 /vendor/
-/runtime/
 *.log
 LICENSE.txt
 /log/
 .idea/
-composer.json
-composer.lock
-/public/uploads/
- 
-#配置文件
-application/database.php
-applicat
